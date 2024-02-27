@@ -97,8 +97,30 @@ function moduleProject2() {
       }
     }
     // 👉 TASK 4 - Use the space bar to exterminate a mosquito 👈
+    else if (evt.key === keys.space) {
+      if (targeted.firstChild && targeted.firstChild.dataset.status === "alive") {
+        targeted.firstChild.dataset.status = "dead"
+        targeted.style.backgroundColor = "red"
+      }
+      // 👉 TASK 5 - End the game 👈
+      let liveMosquitoes = document.querySelectorAll("[data-status=alive]")
+      if (!liveMosquitoes.length) {
+        let paragraph = document.querySelector("p.info")
+        paragraph.textContent = 
+        `Extermination completed in ${getTimeElapsed()/1000} seconds!`
 
-    // 👉 TASK 5 - End the game 👈
+        let restartButton = document.createElement("button")
+        restartButton.textContent = "Restart"
+        restartButton.classList.add("button")
+        restartButton.addEventListener("click", () => {
+          location.reload()
+        })
+        document.querySelector("h2").insertAdjacentElement("beforeend", restartButton)
+        restartButton.focus()
+      }
+    }
+
+
   })
   // 👆 WORK WORK ABOVE THIS LINE 👆
 }
